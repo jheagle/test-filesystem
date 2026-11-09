@@ -29,6 +29,9 @@ const docsFrom = 'src'
 const lintSearch = ['src/**/*.ts']
 const docsTo = '../joshuaheagle.local/projects/test-filesystem/docs'
 const docsIndex = 'MAIN.md'
+// The website's GoatCounter tag, on every page of the documentation (published at /projects/test-filesystem/docs/), as
+// the projects built with js-build-tools get it through docs.bodyHtml; TypeDoc puts customFooterHtml in every page
+const docsFooterHtml = '<script data-goatcounter="https://joshuaheagle.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
 const publishBundleTo = '../joshuaheagle.local/projects/test-filesystem/browser'
 const testPath = ['src']
 const testOptions = {
@@ -205,7 +208,8 @@ export const docs = async () => {
       name: 'test-filesystem',
       readme: fsSync.existsSync(docsIndex) ? docsIndex : 'none',
       logLevel: 'Warn',
-      skipErrorChecking: true
+      skipErrorChecking: true,
+      customFooterHtml: docsFooterHtml
     })
     const project = await app.convert()
     if (!project) {
