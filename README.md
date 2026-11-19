@@ -1,4 +1,6 @@
 # [test-filesystem](https://www.npmjs.com/package/test-filesystem)
+
+[![tests](https://github.com/jheagle/test-filesystem/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/jheagle/test-filesystem/actions/workflows/tests.yml)
 Set up and tear down a temp directory for running filesystem tests.
 
 There are three options for accessing these functions:

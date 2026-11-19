@@ -322,10 +322,17 @@ export const lint = () => lintSource({ failOnError: true })
 /**
  * Run all tests with jest.
  * Configure where tests are located by using 'testPath'.
+ * Fails (so `npm test` exits non-zero) when any test fails: runCLI only reports the results, it doesn't reject.
  * @function
- * @returns {Promise<*>}
+ * @returns {Promise<Object>} Jest's aggregated results, when every test passed.
  */
-export const testFull = () => runCLI(testOptions, testPath)
+export const testFull = async () => {
+  const { results } = await runCLI(testOptions, testPath)
+  if (!results.success) {
+    throw new Error(`${results.numFailedTests} test(s) failed in ${results.numFailedTestSuites} suite(s)`)
+  }
+  return results
+}
 
 // sourceLint fixes the real source in place, so it finishes before anything compiles or tests from it; clean only
 // touches dist/browser output, so the two can run alongside each other.
